@@ -167,8 +167,12 @@ test.only('login', async ({browser})=>{
 
     const ordersButton = await page.locator("(//button[@class='btn btn-custom'])[2]");
     await ordersButton.click();
+
+        await page.locator("tbody").waitFor();
+
     
     const orders = await page.locator('//tbody/tr/th')
+
 
     const noOrders = await orders.count();
 
@@ -182,7 +186,11 @@ test.only('login', async ({browser})=>{
         }
 
     }
-   const OrIDCheck = await page.locator(".col-text").textContent();
-    await expect(orderId.includes(OrIDCheck)).toBeTruthy();
+      const orderIdDetails = await page.locator(".col-text").textContent();
+
+
+    await expect(orderId.includes(orderIdDetails)).toBeTruthy();
+
+
 
 })
