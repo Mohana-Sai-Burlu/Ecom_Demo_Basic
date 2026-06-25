@@ -10,9 +10,9 @@ otenv.config({ path: path.resolve(__dirname, '.env') });
  */
 const config = ({
   testDir: './tests',
-  timeout: 50* 10000,
+timeout: 5 * 10000,
   expect: {
-    timeout: 30 *1000
+    timeout: 3 *1000
   },
   reporter: 'html',
 
