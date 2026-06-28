@@ -36,6 +36,18 @@ test("Validations", async ({page})=>{
    // await page.pause();
 
 
+   //handling frames
+   const frames = await page.frameLocator('//iframe[@id="courses-iframe"]');
+
+   //hitting the visible element
+   await frames.locator("li a[href='lifetime-access']:visible").click();
+
+   const heading = await frames.locator(".text h2").textContent();
+
+   console.log(await heading.split(" ")[1]);
+   
+
+
 
 
 
