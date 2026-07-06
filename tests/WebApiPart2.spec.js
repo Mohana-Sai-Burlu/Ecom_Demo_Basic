@@ -1,7 +1,27 @@
-const {expect,test} = require("@playwright/test");
+//login Ui -> saves into .json
+//test browser -> .jon , cart orders, cart details, orderhistory
 
-test("webst client application", async({page}) =>{
 
+
+// Import Playwright test and assertion library
+const {test,expect} = require('@playwright/test');
+
+// Global variable to store authenticated browser context
+let webcontext;
+
+
+
+// Runs once before all test cases
+test.beforeAll(async({browser}) =>
+    {
+
+    // Create a new browser context (fresh browser session)
+    const context = await browser.newContext();
+
+     // Open a new page
+    const page = await context.newPage();
+
+    // Navigate to the application
     const website ="https://rahulshettyacademy.com/client/#/auth/login";
     await page.goto(website);
 
@@ -11,8 +31,31 @@ test("webst client application", async({page}) =>{
     const pass = await page.getByPlaceholder("enter your passsword");
     await pass.fill("M@rryJa1n");
 
-    await page.getByRole("button",{Name:'Login'}).click();
+    await page.getByRole("button",{name:'Login'}).click();
 
+
+    // Wait until all network requests are completed
+    await page.waitForLoadState('networkidle');
+
+     // Save the logged-in session into a JSON file
+    await context.storageState({path: 'sample.json'});
+
+     // Create a new browser context using the saved login session
+    webcontext = await browser.newContext({storageState : 'sample.json'});
+
+
+})
+
+
+
+// Test Case 1 - Place an order and verify it in Order History
+test('Client app login' ,async()=>{
+
+    const page = await webcontext.newPage();
+
+    // Open a new page using the authenticated browser context
+    const website ="https://rahulshettyacademy.com/client/#/auth/login";
+    await page.goto(website);
 
     await page.locator(".card-body").filter({hasText:"ADIDAS ORIGINAL"}).getByRole("button",{name:"Add to Cart"}).click();
 
@@ -65,20 +108,25 @@ test("webst client application", async({page}) =>{
 
      await page.locator("//tr").filter({hasText:OrID[2]}).locator('//*[@class="btn btn-primary"]').click();
     
-     await page.pause();
 
-     /*
-     for(let i =0; i<orderids; i++){
-        const orderid = await page.locator("//tbody//tr/th").nth(i).textContent();
-        console.log(orderid);
-        if(orderid === OrID[2]){
-            await page.locator("//tbody//tr/td[5]").nth(i).click();
-        }
-     }
+})
 
-     await page.pause();
 
-*/
+// Test Case 2 - Verify page title using saved login session
+test("get page title", async()=>{
 
-    
+    // Open new page using authenticated context
+    const page = await webcontext.newPage();
+
+    const website ="https://rahulshettyacademy.com/client/#/auth/login";
+    await page.goto(website);
+
+    await page.waitForLoadState("networkidle");
+   
+    // Get page title
+    const title = await page.title();
+    expect(title).toEqual("Let's Shop");
+
+
+
 })
