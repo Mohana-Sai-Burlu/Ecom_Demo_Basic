@@ -7,17 +7,13 @@ let response;
 
 const orderPayLoad = {orders: [{country: "cuba", productOrderedId: "6960ea76c941646b7a8b3dd5"}]};
 
-
-test.beforeAll( async()=>{
+test.beforeAll(async () => {
     const ApiContext = await request.newContext();
-    const apiutiles = new ApiUtiles(ApiContext,payLoad);
+
+    const apiutiles = new ApiUtiles(ApiContext, payLoad);
+
     response = await apiutiles.createOrderID(orderPayLoad);
-
-   
-
-   
-
-});
+})
 
 test("login", async ({page})=>{
 
