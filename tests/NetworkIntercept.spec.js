@@ -19,6 +19,8 @@ test('@SP Place the order', async ({ page }) => {
  
     window.localStorage.setItem('token', value);
   }, response.token);
+
+  
   await page.goto("https://rahulshettyacademy.com/client");
  
  
@@ -30,7 +32,6 @@ test('@SP Place the order', async ({ page }) => {
         {
           response,
           body, 
- 
         });
       //intercepting response -APi response-> { playwright fakeresponse}->browser->render data on front end
     });
