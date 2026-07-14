@@ -45,14 +45,38 @@ test("Validations", async ({page})=>{
    const heading = await frames.locator(".text h2").textContent();
 
    console.log(await heading.split(" ")[1]);
-   
 
 
 
+})
 
 
+test("Screenshots & visual comparisons", async ({page})=>{
 
 
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+
+      // await page.pause();
+
+   await expect( await page.locator('//input[@id="displayed-text"]')).toBeVisible();
+
+   await page.locator('//input[@id="hide-textbox"]').click();
 
 
+   //taking screenshot of the whole page
+   await page.screenshot({path: "screenshot.png"});
+
+   await expect( await page.locator('//input[@id="displayed-text"]')).tobehidden;
+
+
+   //take the screenshot of the element 
+      await page.locator('//input[@id="hide-textbox"]').screenshot({path: "element.png"});
+
+})
+
+test.only("visual comparison", async({page})=>{
+
+    await page.goto("https://google.com/");
+
+    await expect(await page.screenshot()).toMatchSnapshot("google.png");
 })
