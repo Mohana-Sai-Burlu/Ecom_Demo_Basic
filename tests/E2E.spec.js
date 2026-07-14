@@ -104,6 +104,7 @@ test.only('login', async ({browser})=>{
     const cart = await page.locator('[routerlink*="cart"]');
     await cart.click();
 
+    await page.waitForLoadState("networkidle");
 
     await page.locator("div li").first().waitFor();
 
