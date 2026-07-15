@@ -58,7 +58,7 @@ test("Screenshots & visual comparisons", async ({page})=>{
 
       // await page.pause();
 
-   await expect( await page.locator('//input[@id="displayed-text"]')).toBeVisible();
+   await expect(page.locator('//input[@id="displayed-text"]')).toBeVisible();
 
    await page.locator('//input[@id="hide-textbox"]').click();
 
@@ -66,7 +66,7 @@ test("Screenshots & visual comparisons", async ({page})=>{
    //taking screenshot of the whole page
    await page.screenshot({path: "screenshot.png"});
 
-   await expect( await page.locator('//input[@id="displayed-text"]')).tobehidden;
+   await expect(page.locator('//input[@id="displayed-text"]')).toBeHidden();
 
 
    //take the screenshot of the element 
@@ -74,9 +74,12 @@ test("Screenshots & visual comparisons", async ({page})=>{
 
 })
 
-test.only("visual comparison", async({page})=>{
+test("visual comparison", async({page})=>{
 
-    await page.goto("https://google.com/");
+    await page.setViewportSize({ width: 1280, height: 720 });
 
-    await expect(await page.screenshot()).toMatchSnapshot("google.png");
+    await page.goto('https://playwright.dev/');
+    await page.waitForLoadState('networkidle');
+
+    await expect(page).toHaveScreenshot('playwright-homepage.png');
 })
