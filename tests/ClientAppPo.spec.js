@@ -12,7 +12,6 @@ test('login functionality', async({page})=>{
    
    await loginpage.login(username, password);
 
-
    await page.pause();
 
 })
