@@ -18,7 +18,7 @@ timeout: 5 * 10000,
 
   use: {
     browserName: 'chromium',
-    headless: false,
+    headless: true,
     screenshot: "on",
     trace:"on",
 

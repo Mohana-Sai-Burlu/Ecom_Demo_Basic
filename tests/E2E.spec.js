@@ -60,7 +60,7 @@ test('ShoppingTest_Registering', async ({browser})=>{
 
 })
 
-test.only('login', async ({browser})=>{
+test('login', async ({browser})=>{
 
 
     const Email = 'SpiderMan@stark.com';
