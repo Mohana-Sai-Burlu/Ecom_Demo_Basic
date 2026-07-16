@@ -11,6 +11,8 @@ class MyCartPage{
 
     async PlaceOrder(productname){
 
+        await expect(this.productNames.first()).toBeVisible();
+
         let bool = false;
         const count = await this.productNames.count();
         
@@ -25,10 +27,10 @@ class MyCartPage{
         await expect(bool).toBeTruthy();
 
         await this.checkoutButton.click();
-        this.page.waitForLoadState("networkidle");
+        await this.page.waitForLoadState("networkidle");
 
 
-        
+
 
 
 

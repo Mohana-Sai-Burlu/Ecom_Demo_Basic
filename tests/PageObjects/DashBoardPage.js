@@ -19,7 +19,7 @@ class DashBoardPage {
                 break;
             }
         }
-        this.page.waitForLoadState("networkidle");
+       await this.page.waitForLoadState("networkidle");
     }
 
 
@@ -27,7 +27,7 @@ class DashBoardPage {
     async NavigatetoCartPage() {
 
         await this.cartbutton.click();
-        this.page.waitForLoadState("networkidle");
+        await this.page.waitForLoadState("networkidle");
     }
 }
 
