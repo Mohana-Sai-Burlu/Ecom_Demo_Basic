@@ -22,5 +22,13 @@ test.only('login functionality', async({page})=>{
 
    const mycartpage = new MyCartPage(page);
    await mycartpage.PlaceOrder(ProductName);
-    //await page.pause();
+  
+
+    await mycartpage.EnterCardDetails('2222 2222 2222 2222', '02', '03','234','mohan','rahulshettyacademy',username, 'India');
+
+
+  
+
+    
+
 })

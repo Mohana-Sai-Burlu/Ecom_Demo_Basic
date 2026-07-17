@@ -172,8 +172,7 @@ test('login', async ({browser})=>{
         await page.locator("tbody").waitFor();
 
     
-    const orders = await page.locator('//tbody/tr/th')
-
+    const orders = await page.locator('//tbody/tr/th');
 
     const noOrders = await orders.count();
 
