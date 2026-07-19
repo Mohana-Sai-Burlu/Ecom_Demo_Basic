@@ -53,7 +53,7 @@ class MyCartPage {
 
 
         await expect(this.VEmail).toHaveValue(email);
-        await this.Country.pressSequentially(country);
+        await this.Country.pressSequentially(country,{ delay: 100 });
         await this.cty.waitFor({ state: 'visible' });
 
         const count = await this.CList.count();
