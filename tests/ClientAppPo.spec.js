@@ -1,26 +1,25 @@
 const {test, expect} = require('@playwright/test');
-const {LoginPage} = require('./PageObjects/LoginPage');
-const {DashBoardPage} = require("./PageObjects/DashBoardPage");
-const {MyCartPage} = require('./PageObjects/MyCartPage');
+const {PoManager} = require('./PageObjects/PoManager');
 
 
 test.only('login functionality', async({page})=>{
 
+    const pomanager = new PoManager(page);
     const username ="SpiderMan@stark.com";
     const password ="M@rryJa1n";
     const ProductName ="ADIDAS ORIGINAL";
 
-   const loginpage = new LoginPage(page);
+   const loginpage = pomanager.getloginpage();
    await loginpage.goto();
    
    await loginpage.login(username, password);
 
 
-   const dashboardPage = new DashBoardPage(page);
+   const dashboardPage = pomanager.getdashboardpage();
    await dashboardPage.addProductToCart(ProductName);
    await dashboardPage.NavigatetoCartPage();
 
-   const mycartpage = new MyCartPage(page);
+   const mycartpage = pomanager.getmycartpage();
    await mycartpage.PlaceOrder(ProductName);
   
 
