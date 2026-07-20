@@ -11,15 +11,18 @@ class DashBoardPage {
     async addProductToCart(productName) {
 
         const count = await this.products.count();
+        
 
         for (let i = 0; i < count; i++) {
             const productTitle = await this.products.nth(i).locator("b").textContent();
+            
             if (productTitle === productName) {
                 await this.cartbuttons.nth(i).click();
+                
                 break;
             }
         }
-       await this.page.waitForLoadState("networkidle");
+       
     }
 
 
